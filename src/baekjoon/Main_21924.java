@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
 
 /**
  * solved.ac MST(크루스칼) 21924 도시 건설 풀이 방법: 최소 신장 트리 - 크루스칼 알고리즘으로 풀이. 오랜만에 MST 알고리즘을 다루니 머리가 하얘지고
- * 낯설다... ㅋㅋㅋ 익숙해지자.. visited 배열은 전체 노드 방문 여부를 검사하기 위해 사용하였다.
+ * 낯설다... ㅋㅋㅋ 익숙해지자.. visited 배열은 전체 노드 방문 여부를 검사하기 위해 사용하였다. 모든 노드의 연결 여부를 findParent 를 통해 계산하였다.
  */
 
 public class Main_21924 {
@@ -18,7 +18,7 @@ public class Main_21924 {
     public static StringTokenizer tokens;
     public static int N, M;
     public static List<Edge> edges = new LinkedList<>();
-    public static int maxCost = 0;
+    public static long maxCost = 0;
     public static int[] parents;
     public static boolean[] visited;
     public static int cnt = 0;
@@ -52,7 +52,7 @@ public class Main_21924 {
         // Collections.sort(edges);
 
         // 3. Cruskal
-        int result = 0;
+        long result = 0;
         PriorityQueue<Edge> pq = new PriorityQueue<>(edges);
 
         for (int i = 0; i < M; i++) {
@@ -82,8 +82,17 @@ public class Main_21924 {
             result += cost;
         }
 
+        boolean isConnected = true;
+        int parent = findParent(1);
+        for (int i = 2; i <= N; i++) {
+            if (parent != findParent(i)) {
+                isConnected = false;
+                break;
+            }
+        }
+
         // 4. print
-        if (cnt == N) {
+        if (cnt == N && isConnected) {
             System.out.println(maxCost - result);
         } else {
             System.out.println(-1);
@@ -100,7 +109,8 @@ public class Main_21924 {
 
     public static int findParent(int a) {
         if (parents[a] != a) {
-            return parents[a] = findParent(parents[a]);
+            parents[a] = findParent(parents[a]);
+            return parents[a];
         } else {
             return parents[a];
         }
