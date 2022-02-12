@@ -2,6 +2,7 @@ package baekjoon;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -20,9 +21,6 @@ public class Main_1593 {
     public static int g, sLength;
     public static String W, S;
 
-    public static Set<String> permutations = new HashSet<>();
-    public static boolean[] visited;
-
     public static int[] counts = new int[52];
 
     public static Set<Integer> alphas = new HashSet<>();
@@ -37,13 +35,6 @@ public class Main_1593 {
         W = br.readLine();
         S = br.readLine();
 
-//        // 2. init permutations
-//        visited = new boolean[W.length()];
-//        addPermutations("", 0);
-//
-//        // 3. find number of cases
-//        int answer = findNumberOfCases();
-
         // 2. count number of w's alphabet
         countWordAlphabet();
 
@@ -57,11 +48,10 @@ public class Main_1593 {
 
     private static int findNumberOfCases() {
         int cases = 0;
-        int diffCnt = 0;
         int[] sCounts = new int[52];
         Set<Integer> sAlphas = new HashSet<>();
 
-        for (int i = 0; i < W.length(); i++) {
+        for (int i = 0; i < S.length(); i++) {
             int idx;
             if (Character.isUpperCase(S.charAt(i))) {
                 idx = (int) S.charAt(i) - 65;
@@ -70,62 +60,19 @@ public class Main_1593 {
             }
             sCounts[idx] += 1;
 
-            if (sCounts[idx] == counts[idx]) {
-                if (sAlphas.remove(idx)) {
-                    diffCnt -= 1;
+            // W의 길이 만큼 카운트를 구한 경우
+            if (i >= W.length()) {
+                int preIdx;
+                if (Character.isUpperCase(S.charAt(i - W.length()))) {
+                    preIdx = (int) S.charAt(i - W.length()) - 65;
+                } else {
+                    preIdx = (int) S.charAt(i - W.length()) - 97 + 26;
                 }
+                sCounts[preIdx] -= 1;
 
-            } else {
-                if (sAlphas.add(idx)) {
-                    diffCnt += 1;
-                }
             }
-
-        }
-
-        if (diffCnt == 0) {
-            cases += 1;
-        }
-
-        for (int i = W.length(); i < S.length(); i++) {
-            int preIdx, nextIdx;
-            if (Character.isUpperCase(S.charAt(i - W.length()))) {
-                preIdx = (int) S.charAt(i - W.length()) - 65;
-            } else {
-                preIdx = (int) S.charAt(i - W.length()) - 97 + 26;
-            }
-            sCounts[preIdx] -= 1;
-
-            if (sCounts[preIdx] == counts[preIdx]) {
-                if (sAlphas.remove(preIdx)) {
-                    diffCnt -= 1;
-                }
-
-            } else {
-                if (sAlphas.add(preIdx)) {
-                    diffCnt += 1;
-                }
-            }
-
-            if (Character.isUpperCase(S.charAt(i))) {
-                nextIdx = (int) S.charAt(i) - 65;
-            } else {
-                nextIdx = (int) S.charAt(i) - 97 + 26;
-            }
-            sCounts[nextIdx] += 1;
-
-            if (sCounts[nextIdx] == counts[nextIdx]) {
-                if (sAlphas.remove(nextIdx)) {
-                    diffCnt -= 1;
-                }
-
-            } else {
-                if (sAlphas.add(nextIdx)) {
-                    diffCnt += 1;
-                }
-            }
-
-            if (diffCnt == 0) {
+            // Arrays 내장 함수로 두 배열의 내용이 같은지 체크
+            if (Arrays.equals(sCounts, counts)) {
                 cases += 1;
             }
 
@@ -148,30 +95,5 @@ public class Main_1593 {
         }
 
     }
-
-//
-//    private static int findNumberOfCases() {
-//        int rtn = 0;
-//
-//        for (int i = 0; i < S.length() - W.length(); i++) {
-//            if (permutations.contains(S.substring(i, i + W.length()))) {
-//                rtn += 1;
-//            }
-//        }
-//
-//        return rtn;
-//    }
-//
-//    private static void addPermutations(String str, int cnt) {
-//        if (cnt == 4) {
-//            permutations.add(str);
-//            return;
-//        }
-//        for (int i = 0; i < W.length(); i++) {
-//            visited[i] = true;
-//            addPermutations(str + W.charAt(i), cnt + 1);
-//            visited[i] = false;
-//        }
-//    }
 
 }
