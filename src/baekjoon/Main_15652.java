@@ -5,8 +5,8 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 /**
- * solved.ac 백트래킹((7분) 11:44 -  15650 N과 M (4) 풀이 방법: N과 M (1) 과 동일하게 백트래킹으로 하되 중복 허용 + 비 내림차순이므로 이전
- * 입력 값을 인자로 전달하여 비내림차순이 되도록 함.
+ * solved.ac 백트래킹((9분) 11:44 - 11:53) 15650 N과 M (4) 풀이 방법: N과 M (1) 과 동일하게 백트래킹으로 하되 중복 허용 + 비
+ * 내림차순이므로 이전 입력 값을 인자로 전달하여 비내림차순이 되도록 함.
  */
 
 public class Main_15652 {
