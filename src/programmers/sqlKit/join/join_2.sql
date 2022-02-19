@@ -1,0 +1,1 @@
+-- SELECT i.animal_id, i.name FROM animal_ins i INNER JOIN animal_outs o ON o.animal_id = i.animal_id WHERE o.datetime < i.datetime ORDER BY i.datetime ;
