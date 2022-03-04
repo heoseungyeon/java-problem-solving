@@ -21,7 +21,7 @@ public class Main_10757 {
         if (A.length() < B.length()) {
             String tmp = A;
             A = B;
-            B = A;
+            B = tmp;
         }
 
         // 2. solution
@@ -40,7 +40,9 @@ public class Main_10757 {
             } else {
                 tmp = 0;
             }
-            answer = sum + answer;
+            if (!(i == A.length() && sum == 0)) {
+                answer = sum + answer;
+            }
         }
 
         System.out.println(answer);
