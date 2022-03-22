@@ -5,8 +5,8 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 /**
- * solved.ac dp(11:05 - ) 22857 가장 긴 짝수 부분 수열(small) 풀이 방법: 약간 보고 1600 말이 되고싶은 원숭이 문제가 떠오름. 그리고 K를 다
- * 쓸필요 없다는 점도 인지하고 풀어야할듯.
+ * solved.ac dp(11:05 - 11:35) 22857 가장 긴 짝수 부분 수열(small) 풀이 방법: 약간 보고 1600 말이 되고싶은 원숭이 문제가 떠오름. 그리고
+ * K를 다 쓸필요 없다는 점도 인지하고 풀어야할듯.
  */
 
 public class Main_22857 {
